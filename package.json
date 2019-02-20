@@ -1,0 +1,23 @@
+{
+  "name": "winesupplychain",
+  "version": "1.0.0",
+  "description": "Wine Supply Chain Blockchain Project on Ethereum Blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Wine",
+    "Supply",
+    "Chain",
+    "Blockchain",
+    "Ethereum"
+  ],
+  "author": "Sagar Atalatti",
+  "license": "ISC",
+  "dependencies": {
+    "babel-register": "^6.26.0",
+    "openzeppelin-solidity": "^2.0.0",
+    "solc": "^0.5.0"
+  }
+}
