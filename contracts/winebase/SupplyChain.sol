@@ -164,7 +164,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         items[_upc] = Item({
             sku : sku,
             upc : _upc,
-            ownerID: _originFarmerID,
+            ownerID: msg.sender,
             originFarmerID: _originFarmerID,
             originFarmName: _originFarmName,
             originFarmInformation: _originFarmInformation,
