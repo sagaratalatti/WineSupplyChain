@@ -20,7 +20,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
   // Define a public mapping 'items' that maps the UPC to an Item.
     mapping (uint => Item) items;
 
-    address public constant emptyAddress = "0x00000000000000000000000000000000000000";
+    address public constant emptyAddress = 0x00000000000000000000000000000000000000;
 
   // Define a public mapping 'itemsHistory' that maps the UPC to an array of TxHash, 
   // that track its journey through the supply chain -- to be sent from DApp.
@@ -166,10 +166,10 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
             addProducer(producerAccount);
         } else {
             // Increment sku
-            sku = sku + 1;
+            uint _sku = sku + 1;
         // Emit the appropriate event
             items[_upc] = Item ({
-                sku : sku,
+                sku : _sku,
                 upc : _upc,
                 ownerID: producerAccount,
                 originFarmerID: _originFarmerID,
