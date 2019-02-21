@@ -11,7 +11,7 @@ contract CustomerRole {
     event CustomerAdded(address indexed account);
     event CustomerRemoved(address indexed account);
 
-    Roles.Role private cusomters;
+    Roles.Role private customers;
 
     constructor() public {
         _addCustomer(msg.sender);

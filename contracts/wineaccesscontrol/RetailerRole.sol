@@ -39,7 +39,7 @@ contract RetailerRole {
         emit RetailerAdded(account);
     }
 
-    function _removeFarmer(address account) internal {
+    function _removeRetailer(address account) internal {
         retailers.remove(account);
         emit RetailerRemoved(account);
     }
