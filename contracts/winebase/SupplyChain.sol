@@ -108,13 +108,14 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     function registerFarm(string _farmName, string _locationName, string _farmLatitude, string _farmLongitude) public {
-        previousFarmId = previousFarmId + 1;
         
-        Location memory farmLocation;
+        previousFarmId = previousFarmId + 1;
 
-        farmLocation.latitude = _farmLatitude;
-        farmLocation.longitude = _farmLongitude;
-        farmLocation.locationName = _locationName; 
+        farmLocation = Location({
+            latitude: _farmLatitude,
+            longitude: _farmLongitude,
+            locationName: _locationName
+        });
 
         farms[previousFarmId] = Farm ({
             farmId: previousFarmId,
@@ -127,7 +128,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public verifyCaller(deployer) {
-        
+
         previousGrapesId = previousGrapesId + 1;
         
         grapes[previousGrapesId] = Grapes ({
