@@ -46,7 +46,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     event GrapesPressed(uint grapesId);
     event GrapesFermented(uint grapesId);
 
-    enum BottleState {Owned, ForSale, Sold, Shipped, Consumed}
+    enum BottleState {Bottled, ForDistributionSold, ShippedRetail, ForSale,  Sold, Shipped, Received, Consumed}
 
     struct WineBottle {
         uint sku;
@@ -58,10 +58,14 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     mapping (uint => WineBottle) bottles;
-    event WineBottleOwned(uint sku);
+    event WineBottled(uint sku);
+    event WineBottleForDistributionSold(uint sku);
+    event WineBottleShippedRetail(uint sku);
+    event WineBottleRetailReceived(uint sku);
     event WineBottleForSale(uint sku);
     event WineBottleSold(uint sku);
     event WineBottleShipped(uint sku);
+    event WineBottleReceived(uint sku);
     event WineBottleConsumed(uint sku);
 
     modifier verifyCaller(address _address) {
@@ -109,7 +113,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     function registerFarm(string _farmName, string _farmLatitude, string _farmLongitude, string _locationAddress) public {
-        
+
         previousFarmId = previousFarmId + 1;
 
         Location memory newLocation = farmLocation[previousFarmId];
@@ -126,7 +130,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         
     }
 
-    function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public verifyCaller(deployer) {
+    function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public {
 
         previousGrapesId = previousGrapesId + 1;
 
@@ -177,13 +181,13 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         vintageYear = grapes[grapeId].vintageYear;
         
         if(uint(grapes[grapeId].state) == 0) {
-            state = "Harvested";
+            state = "Grapes Harvested";
         }
         if(uint(grapes[grapeId].state) == 0) {
-            state = "Pressed";
+            state = "Grapes Pressed";
         }
         if(uint(grapes[grapeId].state) == 0) {
-            state = "Fermented";
+            state = "Grapes Fermented";
         }
 
         farmId = grapes[grapeId].farm.farmId;
@@ -194,7 +198,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
     }
 
-    function bottlingWine(uint grapeId) public
+    function bottlingWine(uint grapeId, uint _price) public
     grapesExists(grapeId)
     verifyGrapesState(grapeId, GrapeState.Fermented)
     verifyCaller(grapes[grapeId].farmOwner) {
@@ -204,18 +208,48 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         WineBottle memory newBottle = bottles[previousBottleId];
         newBottle.sku = previousBottleId;
         newBottle.grapes = grapes[grapeId];
-        newBottle.price = 0;
-        newBottle.bottleState = BottleState.Owned;
+        newBottle.price = _price;
+        newBottle.bottleState = BottleState.Bottled;
         newBottle.buyer = emptyAddress;
         newBottle.bottleOwner = msg.sender;
 
 
-        emit WineBottleOwned(bottles[previousBottleId].sku);
+        emit WineBottled(bottles[previousBottleId].sku);
+    }
+
+    function bottleForDistributionSale(uint sku, uint _price) public payable
+    wineBottleExists(sku)
+    verifyBottleState(sku, BottleState.Bottled)
+    isPaidEnough(_price)
+    returnExcessChange(sku) {
+
+        address distributor = msg.sender;
+        
+        bottles[sku].buyer = distributor;
+        bottles[sku].bottleOwner.transfer(_price);
+        bottles[sku].bottleOwner = distributor;
+        bottles[sku].bottleState = BottleState.ForDistributionSold;
+
+        emit WineBottleForDistributionSold(sku);
+    }
+
+    function bottleShipForRetail(uint sku, uint _price) public payable
+    wineBottleExists(sku)
+    verifyBottleState(sku, BottleState.ForDistributionSold)
+    isPaidEnough(_price)
+    returnExcessChange(sku) {
+
+        address retailer = msg.sender;
+
+        bottles[sku].buyer = msg.sender;
+        bottles[sku].bottleOwner.transfer(_price);
+        bottles[sku].bottleOwner = retailer;
+        bottles[sku].bottleState = BottleState.ShippedRetail;
     }
 
     function bottleForSale(uint sku, uint price) public
     wineBottleExists(sku)
-    verifyBottleState(sku, BottleState.Owned)
+    verifyBottleState(sku, BottleState.Bottled)
     verifyCaller(bottles[sku].bottleOwner) {
 
         bottles[sku].price = price;
@@ -254,9 +288,9 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
         bottles[sku].bottleOwner = bottles[sku].buyer;
         bottles[sku].buyer = emptyAddress;
-        bottles[sku].bottleState = BottleState.Owned;
+        bottles[sku].bottleState = BottleState.Received;
 
-        emit WineBottleOwned(sku);
+        emit WineBottleReceived(sku);
     }
 
     function getBottleInfo(uint _sku) public view 
@@ -269,19 +303,25 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         grapeId = bottles[_sku].grapes.grapesId;
 
         if(uint(bottles[_sku].bottleState) == 0) {
-            state = "Owned";
+            state = "Wine Bottled";
         }
         if(uint(bottles[_sku].bottleState) == 1) {
-            state = "For Sale";
+            state = "Wine Bottle sold for Distribution";
         }
         if(uint(bottles[_sku].bottleState) == 2) {
-            state = "Sold";
+            state = "Wine Shipped to Retailer";
         }
         if(uint(bottles[_sku].bottleState) == 3) {
-            state = "Shipped";
+            state = "Wine Bottle for Sale with Retailer";
         }
         if(uint(bottles[_sku].bottleState) == 4) {
-            state = "Consumed";
+            state = "Wine Bottle Sold to Consumer";
+        }
+        if(uint(bottles[_sku].bottleState) == 5) {
+            state = "Wine Bottle Shipped to Consumer";
+        }
+        if(uint(bottles[_sku].bottleState) == 4) {
+            state = "Wine Bottle Consumed by Consumer";
         }
         
     }
