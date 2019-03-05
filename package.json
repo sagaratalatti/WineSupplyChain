@@ -4,7 +4,8 @@
   "description": "Wine Supply Chain Blockchain Project on Ethereum Blockchain",
   "main": "index.js",
   "scripts": {
-    "test": "truffle-test"
+    "test": "truffle-test",
+    "dev": "webpack-dev-server"
   },
   "keywords": [
     "Wine",
@@ -16,8 +17,28 @@
   "author": "Sagar Atalatti",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-react-jsx": "^6.24.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
+    "copy-webpack-plugin": "^5.0.0",
+    "css-loader": "^2.1.0",
+    "file-loader": "^3.0.1",
+    "html-webpack-plugin": "^3.2.0",
+    "json-loader": "^0.5.7",
+    "node-sass": "^4.11.0",
     "openzeppelin-solidity": "^2.0.0",
-    "solc": "^0.5.0"
+    "sass-loader": "^7.1.0",
+    "solc": "^0.5.0",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "web3": "^1.0.0-beta.47",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
   }
 }

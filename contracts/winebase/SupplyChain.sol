@@ -15,9 +15,9 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     address emptyAddress = 0x00000000000000000000000000000000000000;
 
     struct Location {
-        string longitude;
         string latitude;
-        string locationName;
+        string longitude;
+        string locationAddress;
     }
 
     struct Farm {
@@ -27,6 +27,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     mapping (uint => Farm) farms;
+    mapping (uint => Location) farmLocation;
     event FarmRegistered(uint farmId);
 
     enum GrapeState {Harvested, Pressed, Fermented}
@@ -107,21 +108,19 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         previousFarmId = 0;
     }
 
-    function registerFarm(string _farmName, string _locationName, string _farmLatitude, string _farmLongitude) public {
+    function registerFarm(string _farmName, string _farmLatitude, string _farmLongitude, string _locationAddress) public {
         
         previousFarmId = previousFarmId + 1;
 
-        farmLocation = Location({
-            latitude: _farmLatitude,
-            longitude: _farmLongitude,
-            locationName: _locationName
-        });
+        Location memory newLocation = farmLocation[previousFarmId];
+        newLocation.latitude = _farmLatitude;
+        newLocation.longitude = _farmLongitude;
+        newLocation.locationAddress = _locationAddress;
 
-        farms[previousFarmId] = Farm ({
-            farmId: previousFarmId,
-            farmName: _farmName,
-            location: farmLocation
-        });
+        Farm memory newFarm = farms[previousFarmId];
+        newFarm.farmId = previousFarmId;
+        newFarm.farmName = _farmName;
+        newFarm.location = newLocation;
 
         emit FarmRegistered(previousFarmId);
         
@@ -130,15 +129,14 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public verifyCaller(deployer) {
 
         previousGrapesId = previousGrapesId + 1;
-        
-        grapes[previousGrapesId] = Grapes ({
-            grapesId: previousGrapesId,
-            notes: _notes,
-            vintageYear: _vintageYear,
-            farmOwner: msg.sender,
-            GrapeState: GrapeState.Harvested,
-            farm: farms[farmId].farmName
-        });
+
+        Grapes memory newGrapes = grapes[previousGrapesId];
+        newGrapes.grapesId = previousGrapesId;
+        newGrapes.notes = _notes;
+        newGrapes.vintageYear = _vintageYear;
+        newGrapes.farmOwner = msg.sender;
+        newGrapes.state = GrapeState.Harvested;
+        newGrapes.farm = farms[farmId];
 
         emit GrapesHarvested(previousGrapesId);
     }
@@ -192,7 +190,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         farmName = grapes[grapeId].farm.farmName;
         farmLatitude = grapes[grapeId].farm.location.latitude;
         farmLongitude = grapes[grapeId].farm.location.longitude;
-        farmLocationName = grapes[grapeId].farm.location.locationName;
+        farmLocationName = grapes[grapeId].farm.location.locationAddress;
 
     }
 
@@ -200,16 +198,17 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     grapesExists(grapeId)
     verifyGrapesState(grapeId, GrapeState.Fermented)
     verifyCaller(grapes[grapeId].farmOwner) {
-        
+
         previousBottleId = previousBottleId + 1;
-        bottles[previousBottleId] = WineBottle({
-            sku: previousBottleId,
-            grapes: grapes[grapeId],
-            price: 0,
-            bottleState: BottleState.Owned,
-            buyer: emptyAddress,
-            owner: msg.sender
-        });
+
+        WineBottle memory newBottle = bottles[previousBottleId];
+        newBottle.sku = previousBottleId;
+        newBottle.grapes = grapes[grapeId];
+        newBottle.price = 0;
+        newBottle.bottleState = BottleState.Owned;
+        newBottle.buyer = emptyAddress;
+        newBottle.bottleOwner = msg.sender;
+
 
         emit WineBottleOwned(bottles[previousBottleId].sku);
     }
