@@ -174,7 +174,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
              string farmName,
              string farmLatitude,
              string farmLongitude,
-             string farmLocationName) {
+             string farmLocationAddress) {
 
         grapesId = grapeId;
         notes = grapes[grapeId].notes;
@@ -194,7 +194,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         farmName = grapes[grapeId].farm.farmName;
         farmLatitude = grapes[grapeId].farm.location.latitude;
         farmLongitude = grapes[grapeId].farm.location.longitude;
-        farmLocationName = grapes[grapeId].farm.location.locationAddress;
+        farmLocationAddress = grapes[grapeId].farm.location.locationAddress;
 
     }
 
