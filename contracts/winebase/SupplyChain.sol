@@ -169,7 +169,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     returns (uint grapesId, 
              string notes,
              uint vintageYear,
-             string state,
+             GrapeState state,
              uint farmId,
              string farmName,
              string farmLatitude,
@@ -179,23 +179,12 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         grapesId = grapeId;
         notes = grapes[grapeId].notes;
         vintageYear = grapes[grapeId].vintageYear;
-        
-        if(uint(grapes[grapeId].state) == 0) {
-            state = "Grapes Harvested";
-        }
-        if(uint(grapes[grapeId].state) == 0) {
-            state = "Grapes Pressed";
-        }
-        if(uint(grapes[grapeId].state) == 0) {
-            state = "Grapes Fermented";
-        }
-
+        state = grapes[grapeId].state;
         farmId = grapes[grapeId].farm.farmId;
         farmName = grapes[grapeId].farm.farmName;
         farmLatitude = grapes[grapeId].farm.location.latitude;
         farmLongitude = grapes[grapeId].farm.location.longitude;
         farmLocationAddress = grapes[grapeId].farm.location.locationAddress;
-
     }
 
     function bottlingWine(uint grapeId, uint _price) public
@@ -300,7 +289,6 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         price = bottles[_sku].price;
         owner = bottles[_sku].bottleOwner;
         buyer = bottles[_sku].buyer;
-        grapeId = bottles[_sku].grapes.grapesId;
 
         if(uint(bottles[_sku].bottleState) == 0) {
             state = "Wine Bottled";
@@ -320,9 +308,11 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         if(uint(bottles[_sku].bottleState) == 5) {
             state = "Wine Bottle Shipped to Consumer";
         }
-        if(uint(bottles[_sku].bottleState) == 4) {
+        if(uint(bottles[_sku].bottleState) == 6) {
             state = "Wine Bottle Consumed by Consumer";
         }
+
+        grapeId = bottles[_sku].grapes.grapesId;
         
     }
 
