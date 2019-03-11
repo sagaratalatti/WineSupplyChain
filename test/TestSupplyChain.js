@@ -62,7 +62,7 @@ contract('SupplyChain', function(accounts) {
         console.log('Farm Name: ' + resultFarms[1]);
         console.log('Farm Latitude: ' + resultFarms[2]);
         console.log('Farm Longitude: ' + resultFarms[3]);
-        console.log('Farm Address: ' + resultFarms[4]);
+        console.log('Farm Address: ' + resultFarms[4]); 
 
         // Mark an item as Harvested by calling function harvestItem()
         await supplyChain.harvestGrapes(grapesNotes, vintageYear, farmID, {from: producerID});
