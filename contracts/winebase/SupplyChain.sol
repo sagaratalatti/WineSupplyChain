@@ -130,6 +130,14 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         
     }
 
+    function getFarmInfo(uint farmsId) public view returns (uint farmId, string farmName, string latitude, string longitude, string locationAddress) {
+        farmId = farmsId;
+        farmName = farms[farmsId].farmName;
+        latitude = farms[farmsId].location.latitude;
+        longitude = farms[farmsId].location.longitude;
+        locationAddress = farms[farmsId].location.locationAddress;
+    }
+
     function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public {
 
         previousGrapesId = previousGrapesId + 1;
