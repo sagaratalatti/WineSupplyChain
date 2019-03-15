@@ -13,6 +13,7 @@ contract('SupplyChain', function(accounts) {
     const distributorID = accounts[2]
     const retailerID = accounts[3]
     const customerID = accounts[4]
+    const emptyAddress = 0x00000000000000000000000000000000000000;
     const farmLatitude = "17.809356"
     const farmLongitude = "74.934207"
     const farmAddress = "Shipaiwadi, Motewadi, Maharashtra"
@@ -21,7 +22,8 @@ contract('SupplyChain', function(accounts) {
     const grapesId = 1;
     const grapesNotes = "The sweet taste and excellent nutritional benefits of our pesticide-free berries. Carefully cultivated to ensure that they have no pesticide residue, and packed with love."
     const vintageYear = 2012
-    const winePrice = web3.utils.toWei("1", "ether")
+    const winePrice = 1;
+    const wineCost = web3.utils.toWei('1', 'ether')
     const productNotes = "Aromas of fragrant spring blossom, orchard fruit, hazelnut and bread crust lead the nose on this refined white. The elegantly structured palate offers creamy yellow apple, lemon drop and mineral alongside crisp acidity that leaves a tangy finish. Made with a red grape, this unique white Sangiovese is a first for India."
 
 
@@ -58,12 +60,6 @@ contract('SupplyChain', function(accounts) {
 
         const resultFarms = await supplyChain.getFarmInfo.call(farmID);
 
-        console.log('Farm ID: ' + resultFarms[0]);
-        console.log('Farm Name: ' + resultFarms[1]);
-        console.log('Farm Latitude: ' + resultFarms[2]);
-        console.log('Farm Longitude: ' + resultFarms[3]);
-        console.log('Farm Address: ' + resultFarms[4]); 
-
         // Mark an item as Harvested by calling function harvestItem()
         await supplyChain.harvestGrapes(grapesNotes, vintageYear, farmID, {from: producerID});
 
@@ -74,7 +70,7 @@ contract('SupplyChain', function(accounts) {
         assert.equal(resultGrapes[0], grapesId, 'Error: Missing or Invalid Grapes ID')
         assert.equal(resultGrapes[1], grapesNotes, 'Error: Missing or Invalid Grapes Notes')
         assert.equal(resultGrapes[2], vintageYear, 'Error: Missing or Invalid Vintage Year')
-        assert.equal(resultGrapes[3], 0, 'Error: Missing or Invalid Grapes State')
+        assert.equal(resultGrapes[3], "Grapes Harvested", 'Error: Missing or Invalid Grapes State')
         assert.equal(resultGrapes[4], farmID, 'Error: Missing or Invalid Farm ID')
         assert.equal(resultGrapes[5], farmName, 'Error: Missing or Invalid Farm Name')
         assert.equal(resultGrapes[6], farmLatitude, 'Error: Missing or Invalid Farm Latitude')
@@ -83,27 +79,23 @@ contract('SupplyChain', function(accounts) {
     })    
 
     // 2nd Test
-    it("Testing smart contract function processItem() that allows a farmer to process coffee", async() => {
+    it("Testing smart contract function pressGrapes() & fermentGrapes() that allows a producer to ferment grapes", async() => {
         const supplyChain = await SupplyChain.deployed()
-        
-        // Declare and Initialize a variable for event
-        
         
         // Watch the emitted event Processed()
         
 
         // Mark an item as Processed by calling function processtItem()
-        
-
+        await supplyChain.pressGrapes(grapesId, {from: producerID});
+        await supplyChain.fermentGrapes(grapesId, {from: producerID});
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
-
+        const resultGrapes = await supplyChain.getGrapesInfo.call(grapesId);
         // Verify the result set
-        
+        assert.equal(resultGrapes[3], "Grapes Fermented", 'Error: Missing or Invalid Grapes State')
     })    
 
     // 3rd Test
-    it("Testing smart contract function packItem() that allows a farmer to pack coffee", async() => {
+    it("Testing smart contract function bottlingWine() that allows a producer to bottle wine", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
@@ -113,58 +105,71 @@ contract('SupplyChain', function(accounts) {
         
 
         // Mark an item as Packed by calling function packItem()
-        
+        await supplyChain.bottlingWine(grapesId, winePrice, {from: producerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-        
+        assert.equal(resultWine[0], bottleId, 'Error: Missing or Invalid Wine ID')
+        assert.equal(resultWine[1], winePrice, 'Error: Missing or Invalid Wine Price')
+        assert.equal(resultWine[2], producerID, 'Error: Missing or Invalid Wine Owner')
+        assert.equal(resultWine[3], emptyAddress, 'Error: Missing or Invalid Wine Buyer')
+        assert.equal(resultWine[4], "Wine Bottled", 'Error: Missing or Invalid Wine State')
+        assert.equal(resultWine[5], grapesId, 'Error: Missing or Invalid Grapes ID')
     })    
 
     // 4th Test
-    it("Testing smart contract function sellItem() that allows a farmer to sell coffee", async() => {
+    it("Testing smart contract function bottleForDistributionSale() that allows a producer to sell wine to distributor", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
         
         
         // Watch the emitted event ForSale()
-        
+        await supplyChain.addDistributor(distributorID, {from: deployerID});
 
         // Mark an item as ForSale by calling function sellItem()
-        
-
+        await supplyChain.bottleForDistributionSale(bottleId, winePrice, {from: distributorID, value: wineCost});
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-          
+        assert.equal(resultWine[0], bottleId, 'Error: Missing or Invalid Wine ID')
+        assert.equal(resultWine[1], winePrice, 'Error: Missing or Invalid Wine Price')
+        assert.equal(resultWine[2], distributorID, 'Error: Missing or Invalid Wine Owner')
+        assert.equal(resultWine[3], distributorID, 'Error: Missing or Invalid Wine Buyer')
+        assert.equal(resultWine[4], 'Wine Bottle sold for Distribution', 'Error: Missing or Invalid Wine State')
+        assert.equal(resultWine[5], grapesId, 'Error: Missing or Invalid Grapes ID')
     })    
 
     // 5th Test
-    it("Testing smart contract function buyItem() that allows a distributor to buy coffee", async() => {
+    it("Testing smart contract function bottleShipForRetail() that allows a distributor to sell & ship wine bottle to retailer", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
-        
+        await supplyChain.addRetailer(retailerID, {from: deployerID});
         
         // Watch the emitted event Sold()
-        var event = supplyChain.Sold()
         
 
         // Mark an item as Sold by calling function buyItem()
-        
+        await supplyChain.bottleShipForRetail(bottleId, winePrice, {from: retailerID, value: wineCost});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-        
+         assert.equal(resultWine[0], bottleId, 'Error: Missing or Invalid Wine ID')
+         assert.equal(resultWine[1], winePrice, 'Error: Missing or Invalid Wine Price')
+         assert.equal(resultWine[2], retailerID, 'Error: Missing or Invalid Wine Owner')
+         assert.equal(resultWine[3], retailerID, 'Error: Missing or Invalid Wine Buyer')
+         assert.equal(resultWine[4], 'Wine Shipped to Retailer', 'Error: Missing or Invalid Wine State')
+         assert.equal(resultWine[5], grapesId, 'Error: Missing or Invalid Grapes ID')
     })    
 
     // 6th Test
-    it("Testing smart contract function shipItem() that allows a distributor to ship coffee", async() => {
+    it("Testing smart contract function bottleForSale() that allows a retailer to sell wine bottle", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
@@ -174,37 +179,37 @@ contract('SupplyChain', function(accounts) {
         
 
         // Mark an item as Sold by calling function buyItem()
-        
+        await supplyChain.bottleForSale(bottleId, winePrice, {from: retailerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-              
+        assert.equal(resultWine[2], retailerID, 'Error: Missing or Invalid Wine Owner')
+        assert.equal(resultWine[3], retailerID, 'Error: Missing or Invalid Wine Buyer')
+        assert.equal(resultWine[4], 'Wine Bottle for Sale with Retailer', 'Error: Missing or Invalid Wine State')
     })    
 
     // 7th Test
-    it("Testing smart contract function receiveItem() that allows a retailer to mark coffee received", async() => {
+    it("Testing smart contract function buyBottle() that allows a customer to buy wine from retailer", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
-        
+        await supplyChain.addCustomer(customerID, {from: deployerID});
         
         // Watch the emitted event Received()
-        
 
-        // Mark an item as Sold by calling function buyItem()
-        
+        await supplyChain.buyBottle(bottleId, {from: customerID, value: wineCost});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-             
+        assert.equal(resultWine[4], 'Wine Bottle Sold to Consumer', 'Error: Missing or Invalid Wine State')     
     })    
 
     // 8th Test
-    it("Testing smart contract function purchaseItem() that allows a consumer to purchase coffee", async() => {
+    it("Testing smart contract function shipBottle() that allows retailer to ship wine to customer", async() => {
         const supplyChain = await SupplyChain.deployed()
         
         // Declare and Initialize a variable for event
@@ -214,35 +219,75 @@ contract('SupplyChain', function(accounts) {
         
 
         // Mark an item as Sold by calling function buyItem()
-        
+        await supplyChain.shipBottle(bottleId, {from: retailerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
 
         // Verify the result set
-        
+        assert.equal(resultWine[4], 'Wine Bottle Shipped to Consumer', 'Error: Missing or Invalid Wine State') 
     })    
 
     // 9th Test
-    it("Testing smart contract function fetchItemBufferOne() that allows anyone to fetch item details from blockchain", async() => {
+    it("Testing smart contract function BottleReceived() that allows customer to mark bottle received.", async() => {
         const supplyChain = await SupplyChain.deployed()
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
-        
+        await supplyChain.BottleReceived(bottleId, {from: customerID});
+        const resultWine = await supplyChain.getBottleInfo.call(bottleId);
         // Verify the result set:
-        
+        assert.equal(resultWine[2], customerID, 'Error: Missing or Invalid Wine Owner')
+        assert.equal(resultWine[4], 'Wine Bottle Received by Consumer', 'Error: Missing or Invalid Wine State')
     })
 
     // 10th Test
-    it("Testing smart contract function fetchItemBufferTwo() that allows anyone to fetch item details from blockchain", async() => {
+    it("Testing smart contract function getGrapesInfo() that allows anyone to fetch grapes details from blockchain", async() => {
         const supplyChain = await SupplyChain.deployed()
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
-        
+        const resultGrapes = await supplyChain.getGrapesInfo.call(grapesId);
         
         // Verify the result set:
+        assert.equal(resultGrapes[0], grapesId, 'Error: Missing or Invalid Grapes ID')
+        console.log('Grapes ID: ' + resultGrapes[0])
+        assert.equal(resultGrapes[1], grapesNotes, 'Error: Missing or Invalid Grapes Notes')
+        console.log('Grapes Notes: ' + resultGrapes[1])
+        assert.equal(resultGrapes[2], vintageYear, 'Error: Missing or Invalid Vintage Year')
+        console.log('Grapes Vintage Year: ' + resultGrapes[2])
+        assert.equal(resultGrapes[3], "Grapes Fermented", 'Error: Missing or Invalid Grapes State')
+        console.log('Grapes State: ' + resultGrapes[3])
+        assert.equal(resultGrapes[4], farmID, 'Error: Missing or Invalid Farm ID')
+        console.log('Grapes Farm ID: ' + resultGrapes[4])
+        assert.equal(resultGrapes[5], farmName, 'Error: Missing or Invalid Farm Name')
+        console.log('Grapes Farm Name: ' + resultGrapes[5])
+        assert.equal(resultGrapes[6], farmLatitude, 'Error: Missing or Invalid Farm Latitude')
+        console.log('Grapes Farm Latitude: ' + resultGrapes[6])
+        assert.equal(resultGrapes[7], farmLongitude, 'Error: Missing or Invalid Farm Longitude')
+        console.log('Grapes Farm Longitude: ' + resultGrapes[7])
+        assert.equal(resultGrapes[8], farmAddress, 'Error: Missing or Invalid Farm Address')
+        console.log('Grapes Farm Adddress: ' + resultGrapes[8])
         
+    })
+
+    it("Testing smart contract function getBottleInfo() that allows anyone to fetch wine bottle details on the blockchain", async() => {
+        
+        const supplyChain = await SupplyChain.deployed()
+        
+        const resultWine = await supplyChain.getBottleInfo.call(grapesId);
+
+        assert.equal(resultWine[0], bottleId, 'Error: Missing or Invalid Wine ID')
+        console.log('Wine Bottle ID: ' + resultWine[0])
+        assert.equal(resultWine[1], winePrice, 'Error: Missing or Invalid Wine Price')
+        console.log('Wine Bottle Price: ' + resultWine[1])
+        assert.equal(resultWine[2], customerID, 'Error: Missing or Invalid Wine Owner')
+        console.log('Wine Bottle Owner: ' + resultWine[2])
+        assert.equal(resultWine[3], emptyAddress, 'Error: Missing or Invalid Wine Buyer')
+        console.log('Wine Bottle Buyer: ' + resultWine[3])
+        assert.equal(resultWine[4], 'Wine Bottle Received by Consumer', 'Error: Missing or Invalid Wine State')
+        console.log('Wine Bottle State: ' + resultWine[4])
+        assert.equal(resultWine[5], grapesId, 'Error: Missing or Invalid Grapes ID')
+        console.log('Wine Bottle Grapes ID: ' + resultWine[5])
+
     })
 
 });

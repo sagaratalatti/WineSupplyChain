@@ -1,5 +1,6 @@
 const path = require('path')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
   entry: './app/src/index.js',
@@ -9,6 +10,11 @@ module.exports = {
     filename: 'app.js'
   },
   plugins: [
+    new HtmlWebpackPlugin({ 
+        filename: 'index.html',
+        template: 'app/src/index.html'
+      }
+    ),
     // Copy our app's index.html to the build folder.
     new CopyWebpackPlugin([
       { from: './app/src/index.html', to: 'index.html' }
@@ -33,14 +39,37 @@ module.exports = {
       {
         test: /\.(png|jp(e*)g|svg)$/,  
         use: [{
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: { 
-                limit: 8000, // Convert images < 8kb to base64 strings
-                name: 'images/[hash]-[name].[ext]'
+                name: '[name].[ext]',
+                outputPath: 'images/',
+                publicPath: 'images/'
                 } 
             }]
-        }
-    
+        }, 
+
+        {
+          test: /\.html$/,
+          use: ['html-loader']
+        },
+
+        {
+          test: /\.html$/,  
+          use: [{
+              loader: 'file-loader',
+              options: { 
+                  name: '[name].[ext]'
+                  } 
+              },
+            
+            ],
+            exclude: path.resolve(__dirname, 'app/src/index.html')
+          },       
+        
+          { 
+            test: /\.(png|woff|woff2|eot|ttf|svg)$/, 
+            loader: 'url-loader?limit=1000000'
+           } 
         ]
     },
 }

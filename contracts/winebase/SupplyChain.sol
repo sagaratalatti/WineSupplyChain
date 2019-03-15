@@ -116,12 +116,12 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
         previousFarmId = previousFarmId + 1;
 
-        Location memory newLocation = farmLocation[previousFarmId];
+        Location storage newLocation = farmLocation[previousFarmId];
         newLocation.latitude = _farmLatitude;
         newLocation.longitude = _farmLongitude;
         newLocation.locationAddress = _locationAddress;
 
-        Farm memory newFarm = farms[previousFarmId];
+        Farm storage newFarm = farms[previousFarmId];
         newFarm.farmId = previousFarmId;
         newFarm.farmName = _farmName;
         newFarm.location = newLocation;
@@ -132,7 +132,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
     function getFarmInfo(uint _farmId) public view 
     returns (uint farmId, string farmName, string latitude, string longitude, string locationAddress) {
-        Farm memory returnFarm = farms[_farmId];
+        Farm storage returnFarm = farms[_farmId];
         farmId = returnFarm.farmId;
         farmName = returnFarm.farmName;
         latitude = returnFarm.location.latitude;
@@ -144,7 +144,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
         previousGrapesId = previousGrapesId + 1;
 
-        Grapes memory newGrapes = grapes[previousGrapesId];
+        Grapes storage newGrapes = grapes[previousGrapesId];
         newGrapes.grapesId = previousGrapesId;
         newGrapes.notes = _notes;
         newGrapes.vintageYear = _vintageYear;
@@ -179,7 +179,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     returns (uint grapesId, 
              string notes,
              uint vintageYear,
-             GrapeState state,
+             string state,
              uint farmId,
              string farmName,
              string farmLatitude,
@@ -189,7 +189,15 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         grapesId = grapeId;
         notes = grapes[grapeId].notes;
         vintageYear = grapes[grapeId].vintageYear;
-        state = grapes[grapeId].state;
+        if (uint(grapes[grapeId].state) == 0) {
+            state = "Grapes Harvested";
+        } 
+        if (uint(grapes[grapeId].state) == 1) {
+            state = "Grapes Pressed";
+        } 
+        if (uint(grapes[grapeId].state) == 2) {
+            state = "Grapes Fermented";
+        }
         farmId = grapes[grapeId].farm.farmId;
         farmName = grapes[grapeId].farm.farmName;
         farmLatitude = grapes[grapeId].farm.location.latitude;
@@ -204,7 +212,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
         previousBottleId = previousBottleId + 1;
 
-        WineBottle memory newBottle = bottles[previousBottleId];
+        WineBottle storage newBottle = bottles[previousBottleId];
         newBottle.sku = previousBottleId;
         newBottle.grapes = grapes[grapeId];
         newBottle.price = _price;
@@ -248,7 +256,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
     function bottleForSale(uint sku, uint price) public
     wineBottleExists(sku)
-    verifyBottleState(sku, BottleState.Bottled)
+    verifyBottleState(sku, BottleState.ShippedRetail)
     verifyCaller(bottles[sku].bottleOwner) {
 
         bottles[sku].price = price;
@@ -319,7 +327,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
             state = "Wine Bottle Shipped to Consumer";
         }
         if(uint(bottles[_sku].bottleState) == 6) {
-            state = "Wine Bottle Consumed by Consumer";
+            state = "Wine Bottle Received by Consumer";
         }
 
         grapeId = bottles[_sku].grapes.grapesId;
