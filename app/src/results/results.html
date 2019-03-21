@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wine Supply Chain</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+      </head>
+      <body>
+        <div class="container-contact100">
+          <div class="wrap-contact100">
+            <form class="contact100-form validate-form">
+              <span class="contact100-form-title">
+                Wine Information
+              </span>
+
+              <label class="label-input100" >Enter Wine Bottle ID *</label>
+              <div class="wrap-input100 " data-validate = "Valid Grapes ID">
+                <input id="wine-info-id" class="input100" type="text" placeholder="Eg. 1">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Get Information
+                </button>
+              </div>
+      
+              <label class="label-input100">Wine Bottle ID & Price Saved on Blockchain</label>
+              <div class="wrap-input100 rs1-wrap-input100">
+                <input id="wine-bottle-id" class="input100" type="text" readonly placeholder="Bottle ID">
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100">
+                <input id="wine-bottle-price"class="input100" type="text" readonly placeholder="Wine Bottle Price">
+              </div>
+
+              <label class="label-input100">Wine Bottle Owner</label>
+              <div class="wrap-input100">
+                <input id="bottle-owner" class="input100" type="text" readonly placeholder="0x00000000000000000000000000000000000000">
+              </div>
+
+              <label class="label-input100">Wine Bottle Buyer</label>
+              <div class="wrap-input100">
+                <input id="bottle-buyer" class="input100" type="text" readonly placeholder="0x00000000000000000000000000000000000000">
+              </div>
+
+              <label class="label-input100">Wine Bottle State & Grapes ID Saved on Blockchain</label>
+              <div class="wrap-input100 rs1-wrap-input100">
+                <input id="wine-bottle-state" class="input100" type="text" readonly placeholder="Bottle State">
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100">
+                <input id="bottle-grapes-id"class="input100" type="text" readonly placeholder="Grapes ID">
+              </div>
+      
+              <label class="label-input100">Wine Information</label>
+              <div class="wrap-input100">
+                <textarea id="vineyard-address" class="input100" readonly placeholder="Wine Information..."></textarea>
+              </div>
+      
+            </form>
+      
+            <div class="contact100-more flex-col-c-m">
+                <form class="details100-form validate-form">
+                    <span class="details100-form-title">
+                      Grapes Information
+                    </span>
+      
+                    <label class="details-label-input100">Enter Grapes ID</label>
+                    <div class="wrap-input100">
+                      <input id="grapes-info-id" class="details-input100" type="text" placeholder="Eg: 1">  
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" id="details-proceed-button" type="button">
+                        Get Information
+                      </button>
+                    </div>
+            
+                    <label class="details-label-input100">Grapes ID & Vintage Year saved on Blockchain</label>
+                    <div class="wrap-input100 rs1-wrap-input100">
+                      <input id="grapes-information-id" class="details-input100" type="text" readonly placeholder="Grapes ID">
+                    </div>
+                    <div class="wrap-input100 rs2-wrap-input100">
+                      <input id="grapes-info-vintage"class="details-input100" type="text" readonly placeholder="Vintage Year">
+                    </div>
+
+                    <label class="details-label-input100">Grapes State & Farm ID saved on Blockchain</label>
+                    <div class="wrap-input100 rs1-wrap-input100">
+                      <input id="grapes-info-state" class="details-input100" type="text" readonly placeholder="Grapes State">
+                    </div>
+                    <div class="wrap-input100 rs2-wrap-input100">
+                      <input id="grapes-info-farmId"class="details-input100" type="text" readonly placeholder="Farm ID">
+                    </div>
+
+                    <label class="details-label-input100">Grapes Notes saved on Blockchain</label>
+                    <div class="wrap-input100 validate-input">
+                      <textarea id="grapes-notes" class="details-input100" readonly placeholder="Grapes Notes"></textarea>
+                    </div>
+
+                    <label class="details-label-input100">Grapes Farm Name saved on Blockchain</label>
+                    <div class="wrap-input100">
+                      <input id="grapes-info-name" class="details-input100" type="text" readonly placeholder="Farm Name">  
+                    </div>
+
+                    <label class="details-label-input100">Grapes Farm Co-ordinates saved on Blockchain</label>
+                    <div class="wrap-input100 rs1-wrap-input100">
+                      <input id="farm-latitude" class="details-input100" type="text" readonly placeholder="Farm Latitude">
+                    </div>
+                    <div class="wrap-input100 rs2-wrap-input100">
+                      <input id="farm-longitude"class="details-input100" type="text" readonly placeholder="Farm Longitude">
+                    </div>
+            
+                    <label class="details-label-input100">Farm Address saved on Blockchain</label>
+                    <div class="wrap-input100 validate-input">
+                      <textarea id="farm-address" class="details-input100" readonly placeholder="Farm Address"></textarea>
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" id="details-proceed-button"type="submit" style="display: none;">
+                        Proceed
+                      </button>
+                    </div>
+
+                  </form>
+        </div>
+      </body>
+</html>

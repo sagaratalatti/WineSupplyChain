@@ -26,7 +26,7 @@ contract ProducerRole {
         return producers.has(account);
     }
 
-    function addProducer(address account) public onlyProducer {
+    function addProducer(address account) public {
         _addProducer(account);
     }
 

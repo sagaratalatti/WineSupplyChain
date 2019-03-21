@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Wine Supply Chain</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="cache-control" content="no-cache"/>
+        <meta http-equiv="pragma" content="no-cache"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      </head>
+      <body>
+        <div class="container-contact100">
+          <div class="wrap-contact100">
+            <form class="contact100-form validate-form"
+            action="http://localhost:8080/results.html">
+
+              <span class="contact100-form-sub-title">
+                Wine Distributor
+              </span>
+
+              <label class="label-input100" for="email">Enter Price to Buy Bottle For Distribution *</label>
+              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
+                <input id="distributor-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Purchase
+                </button>
+              </div>
+
+              <span class="contact100-form-sub-title">
+                Wine Retailer
+              </span>
+
+              <label class="label-input100" for="email">Enter Price to Buy Bottle For Retail *</label>
+              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
+                <input id="retail-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Purchase
+                </button>
+              </div>
+
+              <label class="label-input100" for="email">Enter Price to put up bottle for sale *</label>
+              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
+                <input id="sale-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  For Sale
+                </button>
+              </div>
+
+              <span class="contact100-form-sub-title">
+                Customer
+              </span>
+
+              <label class="label-input100" for="first-name">Enter Wine Bottle ID & Price *</label>
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Enter valid Grapes ID">
+                <input id="wine-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <span class="focus-input100"></span>
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Enter valid Price">
+                <input id="wine-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
+                <span class="focus-input100"></span>
+              </div>
+      
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Buy Wine Bottle
+                </button>
+              </div>
+
+              <span class="contact100-form-sub-title">
+                Wine Retailer
+              </span>
+
+              <label class="label-input100" for="email">Enter Bottle ID to ship to customer *</label>
+              <div class="wrap-input100 validate-input" data-validate = "Valid Bottle ID is Required">
+                <input id="ship-bottle-id" class="input100" type="text" placeholder="Eg. 1">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Ship Wine Bottle
+                </button>
+              </div>
+
+              <span class="contact100-form-sub-title">
+                Customer
+              </span>
+              
+              <label class="label-input100" for="email">Mark Wine Bottle Received *</label>
+              <div class="wrap-input100 validate-input" data-validate = "Valid Bottle ID is Required">
+                <input id="mark-bottle-received" class="input100" type="text" placeholder="Eg. 1">
+                <span class="focus-input100"></span>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  Wine Bottle Received
+                </button>
+              </div>
+
+              <div class="container-contact100-form-btn">
+                <button class="details-contact100-form-btn" id="details-proceed-button"type="submit" style="display: none;">
+                  Proceed
+                </button>
+              </div>
+
+            </form>
+      
+            <div class="contact100-more flex-col-c-m">
+                <form class="details100-form validate-form">
+                    <span class="details100-form-title">
+                      Process Grapes
+                    </span>
+            
+                    <label class="details-label-input100">Enter Grapes Information</label>
+                    <div class="wrap-input100 rs1-wrap-input100">
+                      <input id="grapes-vintage" class="details-input100" type="text" placeholder="Vintage Year">
+                    </div>
+                    <div class="wrap-input100 rs2-wrap-input100">
+                      <input id="farm-id"class="details-input100" type="text" placeholder="Farm ID">
+                    </div>
+
+                    <label class="details-label-input100">Grapes Notes</label>
+                    <div class="wrap-input100 validate-input">
+                      <textarea id="grapes-notes" class="details-input100" readonly placeholder="Write Grapes Information..."></textarea>
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                        Harvest Grapes
+                      </button>
+                    </div>
+
+                    <label class="details-label-input100">Enter Grapes ID to Press Grapes:</label>
+                    <div class="wrap-input100">
+                      <input id="press-grapes-id" class="details-input100" type="text" placeholder="Eg: 1">  
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                        Press Grapes
+                      </button>
+                    </div>
+
+                    <label class="details-label-input100">Enter Grapes ID to Ferment Grapes:</label>
+                    <div class="wrap-input100">
+                      <input id="ferment-grapes-id" class="details-input100" type="text" placeholder="Eg: 1">  
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                        Ferment Grapes
+                      </button>
+                    </div>
+                    
+                    <span class="details100-form-sub-title">
+                      Process Wine
+                    </span>
+                    <label class="details-label-input100" for="first-name">Enter Grapes ID & Wine Bottle Price *</label>
+                    <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Enter valid Grapes ID">
+                      <input id="wine-grapes-id" class="details-input100" type="text" placeholder="Grapes ID">
+                      <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Enter valid Price">
+                      <input id="wine-bottle-price"class="details-input100" type="text" placeholder="Wine Bottle Price">
+                      <span class="focus-input100"></span>
+                    </div>
+      
+                    <label class="details-label-input100" for="message">Enter Wine Notes *</label>
+                    <div class="wrap-input100 validate-input" data-validate = "Wine Notes is required">
+                      <textarea id="wine-notes" class="details-input100" placeholder="Write Wine Notes..."></textarea>
+                      <span class="focus-input100"></span>
+                    </div>
+      
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                        Process Wine
+                      </button>
+                    </div>
+                  </form>
+        </div>
+      </body>
+</html>

@@ -279,6 +279,30 @@
     text-align: center;
     padding-bottom: 33px;
   }
+
+  .details100-form-sub-title {
+    width: 100%;
+    display: block;
+    font-family: Poppins-Regular;
+    font-size: 30px;
+    color: #f2f2f2;
+    line-height: 1.2;
+    text-align: center;
+    padding-top: 33px;
+    padding-bottom: 33px;
+  }
+
+  .contact100-form-sub-title {
+    width: 100%;
+    padding-top: 30px;
+    display: block;
+    font-family: Poppins-Regular;
+    font-size: 30px;
+    color: #333333;
+    line-height: 1.2;
+    text-align: center;
+    padding-bottom: 33px;
+  }
   
   
   
@@ -468,6 +492,37 @@
     -o-transition: all 0.4s;
     -moz-transition: all 0.4s;
     transition: all 0.4s;
+  }
+
+  .details-contact100-form-btn {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 20px;
+    min-width: 200px;
+    height: 50px;
+    border-radius: 2px;
+    background: #f2f2f2;
+  
+    font-family: Montserrat-Bold;
+    font-size: 12px;
+    color: #333333;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    transition: all 0.4s;
+  }
+
+  .details-contact100-form-btn:hover {
+    background: #F44336
   }
   
   .contact100-form-btn:hover {

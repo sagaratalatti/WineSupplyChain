@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Contact V1</title>
+        <title>Wine Supply Chain</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
       </head>
@@ -49,7 +49,8 @@
             </form>
       
             <div class="contact100-more flex-col-c-m">
-                <form class="details100-form validate-form">
+                <form class="details100-form validate-form"
+                      action="http://localhost:8080/process.html">
                     <span class="details100-form-title">
                       Registration Details
                     </span>
@@ -79,9 +80,14 @@
                     <div class="wrap-input100 validate-input">
                       <textarea id="details-vineyard-address" class="details-input100" readonly placeholder="Vineyard Address"></textarea>
                     </div>
+
+                    <div class="container-contact100-form-btn">
+                      <button class="details-contact100-form-btn" id="details-proceed-button"type="submit" style="display: none;">
+                        Proceed
+                      </button>
+                    </div>
+
                   </form>
         </div>
-
-        <script src="./app.js"></script>
       </body>
 </html>
