@@ -18,14 +18,18 @@
                 Wine Distributor
               </span>
 
-              <label class="label-input100" for="email">Enter Price to Buy Bottle For Distribution *</label>
-              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
-                <input id="distributor-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+              <label class="label-input100" for="first-name">Enter Wine Bottle ID & Price for Distribution*</label>
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Enter valid Bottle ID">
+                <input id="dist-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <span class="focus-input100"></span>
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Enter valid Price">
+                <input id="dist-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
                 <span class="focus-input100"></span>
               </div>
 
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.buyBottleForDistribution()">
                   Purchase
                 </button>
               </div>
@@ -34,26 +38,34 @@
                 Wine Retailer
               </span>
 
-              <label class="label-input100" for="email">Enter Price to Buy Bottle For Retail *</label>
-              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
-                <input id="retail-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+              <label class="label-input100" for="first-name">Enter Wine Bottle ID & Price For Retail*</label>
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Enter valid Bottle ID">
+                <input id="ret-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <span class="focus-input100"></span>
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Enter valid Price">
+                <input id="ret-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
                 <span class="focus-input100"></span>
               </div>
 
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.buyBottleForRetail()">
                   Purchase
                 </button>
               </div>
 
-              <label class="label-input100" for="email">Enter Price to put up bottle for sale *</label>
-              <div class="wrap-input100 validate-input" data-validate = "Valid Price is Required">
-                <input id="sale-bottle-price" class="input100" type="text" placeholder="Eg. 1 Ether">
+              <label class="label-input100" for="first-name">Enter Wine Bottle ID & Price For Sale*</label>
+              <div class="wrap-input100 rs1-wrap-input100 validate-input" data-validate="Enter valid Bottle ID">
+                <input id="sale-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <span class="focus-input100"></span>
+              </div>
+              <div class="wrap-input100 rs2-wrap-input100 validate-input" data-validate="Enter valid Price">
+                <input id="sale-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
                 <span class="focus-input100"></span>
               </div>
 
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.bottleForSale()">
                   For Sale
                 </button>
               </div>
@@ -73,7 +85,7 @@
               </div>
       
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.buyBottle()">
                   Buy Wine Bottle
                 </button>
               </div>
@@ -89,7 +101,7 @@
               </div>
 
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.shipBottle()">
                   Ship Wine Bottle
                 </button>
               </div>
@@ -105,7 +117,7 @@
               </div>
 
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" type="button" onclick="App.receivedBottle()">
                   Wine Bottle Received
                 </button>
               </div>
@@ -138,7 +150,7 @@
                     </div>
 
                     <div class="container-contact100-form-btn">
-                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.harvestGrapes()">
                         Harvest Grapes
                       </button>
                     </div>
@@ -149,7 +161,7 @@
                     </div>
 
                     <div class="container-contact100-form-btn">
-                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.pressGrapes()">
                         Press Grapes
                       </button>
                     </div>
@@ -160,7 +172,7 @@
                     </div>
 
                     <div class="container-contact100-form-btn">
-                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.fermentGrapes()">
                         Ferment Grapes
                       </button>
                     </div>
@@ -185,7 +197,7 @@
                     </div>
       
                     <div class="container-contact100-form-btn">
-                      <button class="details-contact100-form-btn" type="button" onclick="App.registerFarm()">
+                      <button class="details-contact100-form-btn" type="button" onclick="App.processWine()">
                         Process Wine
                       </button>
                     </div>

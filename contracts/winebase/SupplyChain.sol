@@ -67,7 +67,6 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     event WineBottleSold(uint sku);
     event WineBottleShipped(uint sku);
     event WineBottleReceived(uint sku);
-    event WineBottleConsumed(uint sku);
 
     modifier verifyCaller(address _address) {
         require(msg.sender == _address, "Caller cannot be verified!");

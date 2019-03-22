@@ -26,7 +26,7 @@ contract CustomerRole {
         return customers.has(account);
     }
 
-    function addCustomer(address account) public onlyCustomer {
+    function addCustomer(address account) {
         _addCustomer(account);
     }
 

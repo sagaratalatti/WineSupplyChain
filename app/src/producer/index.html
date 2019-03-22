@@ -4,6 +4,15 @@
         <title>Wine Supply Chain</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../styles/main.css">
+      <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../animation/animate.css">
+      <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
+      <!--===============================================================================================-->
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <!--===============================================================================================-->
       </head>
       <body>
         <div class="container-contact100">
@@ -42,7 +51,7 @@
               </div>
       
               <div class="container-contact100-form-btn">
-                <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                <button class="contact100-form-btn" id="register-btn" type="button" onclick="App.registerFarm()">
                   Register
                 </button>
               </div>
@@ -50,7 +59,7 @@
       
             <div class="contact100-more flex-col-c-m">
                 <form class="details100-form validate-form"
-                      action="http://localhost:8080/process.html">
+                      >
                     <span class="details100-form-title">
                       Registration Details
                     </span>
@@ -89,5 +98,10 @@
 
                   </form>
         </div>
+        <script src="./index.js"></script>
+        <!--===============================================================================================-->
+          <script src="../bootstrap/js/popper.js"></script>
+          <script src="../bootstrap/js/bootstrap.min.js"></script>
+        <!--===============================================================================================-->
       </body>
 </html>
