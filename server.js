@@ -5,9 +5,10 @@ const Web3 = require('web3');
 const truffle_connect = require('./app/src/app.js');
 const bodyParser = require('body-parser');
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use('/', express.static('./app/src/producer'));
+app.use('/', express.static('./app/src/public/html'));
 
 app.post('/registerFarm', (req, res) => {
     console.log("**** GET /getFarmInfo ****");

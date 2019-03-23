@@ -16,12 +16,13 @@
   "author": "Sagar Atalatti",
   "license": "ISC",
   "dependencies": {
-    "openzeppelin-solidity": "^2.0.0",
-    "solc": "^0.5.0",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "jquery": "^3.3.1",
-    "nodemon": "^1.14.12"
+    "nodemon": "^1.14.12",
+    "openzeppelin-solidity": "^2.0.0",
+    "pug": "^2.0.3",
+    "solc": "^0.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.22.2",

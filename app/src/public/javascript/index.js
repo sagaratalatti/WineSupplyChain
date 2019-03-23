@@ -5,7 +5,7 @@ $('#register-btn').click(function () {
   name = $('#vineyard-name').val();
   address = $('#vineyard-address').val();
 
-  $.post('/registerFarm', {producerId: currentAccount, vineyardName: name, vineyardLatitude: latitude, vineyardLongitude: longitude, vineyardAddress: address, function (response) {
+  $.post('/', {producerId: currentAccount, vineyardName: name, vineyardLatitude: latitude, vineyardLongitude: longitude, vineyardAddress: address, function (response) {
     $('#details-producer-id').text(currentAccount);
     $('#details-vineyard-id').text(response[0]);
     $('#details-vineyard-name').text(response[1]);
