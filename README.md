@@ -83,9 +83,29 @@ Buy Bottle for Distribution -> Buy Bottle for Retail -> Put up Bottle for Sale -
 
 #### Project Information:
 
- - ERC-721 Token Name: SE7EN
- - ERC-721 Token Symbol: SVEN
- - Token Address on the rinkeby Network: 0x832bBB9E3d4615DADAf5D434a04C7A6C3A2DA169
+ - Migrations:
+ Transaction Hash: 0x05eaf3218231f9b15fd6ab4295a75b3ab7a3fd058e54af0e669b3f467fe4bdef
+ Contract Address: 0x4644241111e06c8566cf81524cd22d5433e6b710
+ 
+ - ProducerRole:
+ Transaction Hash: 0x6437087e8a76c0672b96a95e598b5578fef722cf2c16ea04e02a07455ddf610f
+ Contract Address: 0xce8a0ec818cbc311247db6c6af43576c6f368d3a
+ 
+ - DistributorRole:
+ Transaction Hash: 0xa02294e75e7a3cd26b3b37e50bf4322f8c8038e05289a821cbefb3a83a546fe1
+ Contract Address: 0x0eebf36ef6bbced2a3cb6d41fe8f57c2975fb79e
+ 
+ - RetailerRole:
+ Transaction Hash: 0x41168b7742c29762caf458a69985e0889b91c640815ce83841511a1f71bdc602
+ Contract Address: 0x6e22541d7b63317d1c217137d2dce8f6bafe05fd
+ 
+ - CustomerRole:
+ Transaction Hash: 0x3a18690870ac59dd4028326b5eb1191dc9ef9ef125e5ca4bbd028cb333c341b5
+ Contract Address: 0x6d7d43f75331e462507e2455b2f6ff4c5dad7188
+ 
+ - SupplyChain: 
+ Transaction Hash: 0x15781e2fd2dadf49e2d13a2dea5edc5f39df6872f340f83419438ddabff5f266
+ Contract Address: 0x979591c3f3c3c5e8466b0601666bad9ae28811ad
 
 
    [Truffle]: <https://github.com/trufflesuite/truffle>
