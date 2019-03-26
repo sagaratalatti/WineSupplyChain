@@ -26,7 +26,7 @@ contract DistributorRole {
         return distributors.has(account);
     }
 
-    function addDistributor(address account) {
+    function addDistributor(address account) public onlyDistributor {
         _addDistributor(account);
     }
 

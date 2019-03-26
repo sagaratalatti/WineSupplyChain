@@ -24,7 +24,7 @@ contract('SupplyChain', function(accounts) {
     const vintageYear = 2012
     const winePrice = 1;
     const wineCost = web3.utils.toWei('1', 'ether')
-    const productNotes = "Aromas of fragrant spring blossom, orchard fruit, hazelnut and bread crust lead the nose on this refined white. The elegantly structured palate offers creamy yellow apple, lemon drop and mineral alongside crisp acidity that leaves a tangy finish. Made with a red grape, this unique white Sangiovese is a first for India."
+    const wineNotes = "Aromas of fragrant spring blossom, orchard fruit, hazelnut and bread crust lead the nose on this refined white. The elegantly structured palate offers creamy yellow apple, lemon drop and mineral alongside crisp acidity that leaves a tangy finish. Made with a red grape, this unique white Sangiovese is a first for India."
 
 
     console.log("ganache-cli accounts used here...")
@@ -56,12 +56,10 @@ contract('SupplyChain', function(accounts) {
 
         await supplyChain.addProducer(producerID, {from: deployerID});
 
-        await supplyChain.registerFarm(farmName, farmLatitude, farmLongitude, farmAddress, {from: producerID});
-
-        const resultFarms = await supplyChain.getFarmInfo.call(farmID);
+        await supplyChain.registerFarm(farmID, farmName, farmLatitude, farmLongitude, farmAddress, {from: producerID});
 
         // Mark an item as Harvested by calling function harvestItem()
-        await supplyChain.harvestGrapes(grapesNotes, vintageYear, farmID, {from: producerID});
+        await supplyChain.harvestGrapes(grapesId, grapesNotes, vintageYear, farmID, {from: producerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
          
@@ -105,7 +103,7 @@ contract('SupplyChain', function(accounts) {
         
 
         // Mark an item as Packed by calling function packItem()
-        await supplyChain.bottlingWine(grapesId, winePrice, {from: producerID});
+        await supplyChain.bottlingWine(bottleId, grapesId, winePrice, wineNotes, {from: producerID});
 
         // Retrieve the just now saved item from blockchain by calling function fetchItem()
         const resultWine = await supplyChain.getBottleInfo.call(bottleId);

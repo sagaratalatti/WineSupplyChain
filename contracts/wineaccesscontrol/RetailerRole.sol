@@ -26,7 +26,7 @@ contract RetailerRole {
         return retailers.has(account);
     }
 
-    function addRetailer(address account) {
+    function addRetailer(address account) public onlyRetailer {
         _addRetailer(account);
     }
 

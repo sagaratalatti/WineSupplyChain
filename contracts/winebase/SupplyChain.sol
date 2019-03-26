@@ -4,14 +4,12 @@ import ".././wineaccesscontrol/ProducerRole.sol";
 import ".././wineaccesscontrol/DistributorRole.sol";
 import ".././wineaccesscontrol/RetailerRole.sol";
 import ".././wineaccesscontrol/CustomerRole.sol";
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 
-contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRole {
+contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRole, Ownable {
 
     address deployer;
-    uint previousGrapesId;
-    uint previousBottleId;
-    uint previousFarmId;
     address emptyAddress = 0x00000000000000000000000000000000000000;
 
     struct Location {
@@ -107,26 +105,21 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
 
     constructor() public {
         deployer = msg.sender;
-        previousGrapesId = 0;
-        previousBottleId = 0;
-        previousFarmId = 0;
     }
 
-    function registerFarm(string _farmName, string _farmLatitude, string _farmLongitude, string _locationAddress) public {
+    function registerFarm(uint farmId, string _farmName, string _farmLatitude, string _farmLongitude, string _locationAddress) public {
 
-        previousFarmId = previousFarmId + 1;
-
-        Location storage newLocation = farmLocation[previousFarmId];
+        Location storage newLocation = farmLocation[farmId];
         newLocation.latitude = _farmLatitude;
         newLocation.longitude = _farmLongitude;
         newLocation.locationAddress = _locationAddress;
 
-        Farm storage newFarm = farms[previousFarmId];
-        newFarm.farmId = previousFarmId;
+        Farm storage newFarm = farms[farmId];
+        newFarm.farmId = farmId;
         newFarm.farmName = _farmName;
         newFarm.location = newLocation;
 
-        emit FarmRegistered(previousFarmId);
+        emit FarmRegistered(farmId);
         
     }
 
@@ -140,19 +133,17 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         locationAddress = returnFarm.location.locationAddress;
     }
 
-    function harvestGrapes(string _notes, uint _vintageYear, uint farmId) public {
+    function harvestGrapes(uint grapesId, string _notes, uint _vintageYear, uint farmId) public {
 
-        previousGrapesId = previousGrapesId + 1;
-
-        Grapes storage newGrapes = grapes[previousGrapesId];
-        newGrapes.grapesId = previousGrapesId;
+        Grapes storage newGrapes = grapes[grapesId];
+        newGrapes.grapesId = grapesId;
         newGrapes.notes = _notes;
         newGrapes.vintageYear = _vintageYear;
         newGrapes.farmOwner = msg.sender;
         newGrapes.state = GrapeState.Harvested;
         newGrapes.farm = farms[farmId];
 
-        emit GrapesHarvested(previousGrapesId);
+        emit GrapesHarvested(grapesId);
     }
 
     function pressGrapes(uint grapeId) public 
@@ -205,15 +196,13 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         farmLocationAddress = grapes[grapeId].farm.location.locationAddress;
     }
 
-    function bottlingWine(uint grapeId, uint _price, string notes) public
+    function bottlingWine(uint bottleId, uint grapeId, uint _price, string notes) public
     grapesExists(grapeId)
     verifyGrapesState(grapeId, GrapeState.Fermented)
     verifyCaller(grapes[grapeId].farmOwner) {
 
-        previousBottleId = previousBottleId + 1;
-
-        WineBottle storage newBottle = bottles[previousBottleId];
-        newBottle.sku = previousBottleId;
+        WineBottle storage newBottle = bottles[bottleId];
+        newBottle.sku = bottleId;
         newBottle.grapes = grapes[grapeId];
         newBottle.price = _price;
         newBottle.bottleState = BottleState.Bottled;
@@ -221,8 +210,7 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
         newBottle.bottleOwner = msg.sender;
         newBottle.wineNotes = notes;
 
-
-        emit WineBottled(bottles[previousBottleId].sku);
+        emit WineBottled(bottles[bottleId].sku);
     }
 
     function bottleForDistributionSale(uint sku, uint _price) public payable
