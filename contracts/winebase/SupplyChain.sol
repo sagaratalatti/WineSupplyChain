@@ -167,14 +167,14 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     }
 
     function getGrapesInfo(uint grapeId) public view
-    returns (uint grapesId, 
-             string notes,
-             uint vintageYear,
-             string state,
-             uint farmId,
-             string farmName,
-             string farmLatitude,
-             string farmLongitude,
+    returns (uint grapesId, //0
+             string notes, //1
+             uint vintageYear, //2
+             string state, //3
+             uint farmId, //4
+             string farmName, //5
+             string farmLatitude, //6
+             string farmLongitude, //7
              string farmLocationAddress) {
 
         grapesId = grapeId;

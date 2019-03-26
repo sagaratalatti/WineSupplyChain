@@ -137,11 +137,11 @@
 
               <label class="label-input100">Enter Wine Bottle ID & Price For Sale*</label>
               <div class="wrap-input100 rs1-wrap-input100">
-                <input id="process-sale-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <input id="retail-sale-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
                 <span class="focus-input100"></span>
               </div>
               <div class="wrap-input100 rs2-wrap-input100">
-                <input id="process-ale-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
+                <input id="retail-sale-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
                 <span class="focus-input100"></span>
               </div>
 
@@ -157,11 +157,11 @@
 
               <label class="label-input100">Enter Wine Bottle ID & Price *</label>
               <div class="wrap-input100 rs1-wrap-input100">
-                <input id="process-wine-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
+                <input id="customer-wine-bottle-id" class="input100" type="text" placeholder="Wine Bottle ID">
                 <span class="focus-input100"></span>
               </div>
               <div class="wrap-input100 rs2-wrap-input100">
-                <input id="process-wine-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
+                <input id="customer-wine-bottle-price"class="input100" type="text" placeholder="Wine Bottle Price">
                 <span class="focus-input100"></span>
               </div>
       
@@ -307,7 +307,7 @@
                 </div>
   
                 <div class="container-contact100-form-btn">
-                  <button class="contact100-form-btn" type="button" onclick="App.registerFarm()">
+                  <button class="contact100-form-btn" type="button" onclick="App.getWineInfo()">
                     Get Information
                   </button>
                 </div>
@@ -340,7 +340,7 @@
         
                 <label class="label-input100">Wine Information</label>
                 <div class="wrap-input100">
-                  <textarea id="results-vineyard-address" class="input100" readonly placeholder="Wine Information..."></textarea>
+                  <textarea id="results-wine-notes" class="input100" readonly placeholder="Wine Information..."></textarea>
                 </div>
         
               </form>
@@ -357,7 +357,7 @@
                       </div>
   
                       <div class="container-contact100-form-btn">
-                        <button class="details-contact100-form-btn" id="details-proceed-button" type="button">
+                        <button class="details-contact100-form-btn" type="button" onclick="App.getGrapesInfo()" >
                           Get Information
                         </button>
                       </div>
