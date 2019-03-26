@@ -83,13 +83,13 @@ Buy Bottle for Distribution -> Buy Bottle for Retail -> Put up Bottle for Sale -
 
 #### Project Information:
 
- - Migrations:
- Transaction Hash: 0x05eaf3218231f9b15fd6ab4295a75b3ab7a3fd058e54af0e669b3f467fe4bdef
- Contract Address: 0x4644241111e06c8566cf81524cd22d5433e6b710
+ - Migrations:  
+ Transaction Hash: 0x05eaf3218231f9b15fd6ab4295a75b3ab7a3fd058e54af0e669b3f467fe4bdef  
+ Contract Address: 0x4644241111e06c8566cf81524cd22d5433e6b710 
  
- - ProducerRole:
- Transaction Hash: 0x6437087e8a76c0672b96a95e598b5578fef722cf2c16ea04e02a07455ddf610f
- Contract Address: 0xce8a0ec818cbc311247db6c6af43576c6f368d3a
+ - ProducerRole:  
+ Transaction Hash: 0x6437087e8a76c0672b96a95e598b5578fef722cf2c16ea04e02a07455ddf610f  
+ Contract Address: 0xce8a0ec818cbc311247db6c6af43576c6f368d3a  
  
  - DistributorRole:
  Transaction Hash: 0xa02294e75e7a3cd26b3b37e50bf4322f8c8038e05289a821cbefb3a83a546fe1
