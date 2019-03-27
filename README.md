@@ -2,6 +2,13 @@
 
 Wine Supply Chain management and process tracking on Ethereum Blockchain. Project provides transaparency of every process of wine production right from grapes to bottle delivered to delivered to the customer. The project contains a minimum of 4 different actors (to allow for an intermediary aside from buyer and seller) and 10 different states (harvested, bottled, shipped, for sale received).
 
+# Project Architecture.
+
+- Project architecture diagrams can be found in the architecture folder.
+
+State Architecture: 
+![Supplychain Webapp](https://github.com/sagaratalatti/WineSupplyChain/blob/master/architecture/State.png)
+
 # Implementations in this project.
 
 Add Smart Contract Functions: 
