@@ -60,7 +60,6 @@ contract SupplyChain is ProducerRole, DistributorRole, RetailerRole, CustomerRol
     event WineBottled(uint sku);
     event WineBottleForDistributionSold(uint sku);
     event WineBottleShippedRetail(uint sku);
-    event WineBottleRetailReceived(uint sku);
     event WineBottleForSale(uint sku);
     event WineBottleSold(uint sku);
     event WineBottleShipped(uint sku);
