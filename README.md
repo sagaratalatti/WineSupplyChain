@@ -6,7 +6,7 @@ Wine Supply Chain management and process tracking on Ethereum Blockchain. Projec
 
 - Project architecture diagrams can be found in the architecture folder.
 
-State Architecture: 
+State Architecture:   
 ![Supplychain Webapp](https://github.com/sagaratalatti/WineSupplyChain/blob/master/architecture/State.png)
 
 # Implementations in this project.
