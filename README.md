@@ -99,7 +99,7 @@ Buy Bottle for Distribution -> Buy Bottle for Retail -> Put up Bottle for Sale -
  Contract Address: 0xe543723433F62Ddd2dcAd212B9AD516a1E3188F0  
  
  - DistributorRole:  
- Transaction Hash: 0x94c403ba5778bc2bd4c44f8a3c6aa5e60878f064ac716b6ec59eeeee82497ab9 
+ Transaction Hash: 0x94c403ba5778bc2bd4c44f8a3c6aa5e60878f064ac716b6ec59eeeee82497ab9  
  Contract Address: 0x56AF12F57027852dD1A8134a8f73F179AB067417  
  
  - RetailerRole:  
