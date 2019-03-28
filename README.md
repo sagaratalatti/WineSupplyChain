@@ -91,28 +91,28 @@ Buy Bottle for Distribution -> Buy Bottle for Retail -> Put up Bottle for Sale -
 #### Project Information:
 
  - Migrations:  
- Transaction Hash: 0x05eaf3218231f9b15fd6ab4295a75b3ab7a3fd058e54af0e669b3f467fe4bdef  
- Contract Address: 0x4644241111e06c8566cf81524cd22d5433e6b710 
+ Transaction Hash: 0x7cbacef69457a4455d5f3c2d76a969bdd55bbc73a1c1c61b07dc5919fbf3a89d  
+ Contract Address: 0xC83F320D0BE40427f798A0b53e11bB9910309E69 
  
  - ProducerRole:  
- Transaction Hash: 0x6437087e8a76c0672b96a95e598b5578fef722cf2c16ea04e02a07455ddf610f  
- Contract Address: 0xce8a0ec818cbc311247db6c6af43576c6f368d3a  
+ Transaction Hash: 0x39765103ce0df5ca97e8b28ae06df82c08b753fcd47e749dc31a7be810fcb2b3  
+ Contract Address: 0xe543723433F62Ddd2dcAd212B9AD516a1E3188F0  
  
  - DistributorRole:  
- Transaction Hash: 0xa02294e75e7a3cd26b3b37e50bf4322f8c8038e05289a821cbefb3a83a546fe1  
- Contract Address: 0x0eebf36ef6bbced2a3cb6d41fe8f57c2975fb79e  
+ Transaction Hash: 0x94c403ba5778bc2bd4c44f8a3c6aa5e60878f064ac716b6ec59eeeee82497ab9 
+ Contract Address: 0x56AF12F57027852dD1A8134a8f73F179AB067417  
  
  - RetailerRole:  
- Transaction Hash: 0x41168b7742c29762caf458a69985e0889b91c640815ce83841511a1f71bdc602  
- Contract Address: 0x6e22541d7b63317d1c217137d2dce8f6bafe05fd  
+ Transaction Hash: 0x1065b2a1335a4b245eec2de0b1cfaafa732eb3957efe6f10a37a45b4a83c18a7  
+ Contract Address: 0x55421074DF0e81197f973B4eC52FD50073d87E00  
  
  - CustomerRole:  
- Transaction Hash: 0x3a18690870ac59dd4028326b5eb1191dc9ef9ef125e5ca4bbd028cb333c341b5  
- Contract Address: 0x6d7d43f75331e462507e2455b2f6ff4c5dad7188  
+ Transaction Hash: 0x83abdd331a5b5a0f408f2f86c0dfebb495928511e6edf1a4f120d8c33f28ff6b  
+ Contract Address: 0x1a8b71d27362aB0c1B9aF87C9Dd39295119b8a82  
  
  - SupplyChain:   
- Transaction Hash: 0x15781e2fd2dadf49e2d13a2dea5edc5f39df6872f340f83419438ddabff5f266  
- Contract Address: 0x979591c3f3c3c5e8466b0601666bad9ae28811ad  
+ Transaction Hash: 0x76bd29d12ef47c355126c055ebd626870144008ff8b6551b41ddcf1847eafe8e  
+ Contract Address: 0x7c1639f7229945e1fb4654e697B2c4fC403cB642  
 
 
    [Truffle]: <https://github.com/trufflesuite/truffle>
